@@ -1,0 +1,39 @@
+{% extends "tutorial/layout.html" %}
+{% block content %}
+{% load static %}
+
+<div class="jumbotron">
+	{% csrf_token %}
+	<label for="sort">Sort By</label>
+	<select name="sort" id="sort">
+		<option value="latest">
+			Latest
+		</option>
+		<option value="oldest">
+			Oldest
+		</option>
+		<option value="mlike">
+			Most Liked
+		</option>
+		<option value="llike">
+			Least Liked
+		</option>
+	</select>
+	<div id="sort-result">
+		
+	</div>
+<!-- 	{% if questions.count > 0 %}
+		{% for q in questions %}
+		<div>{{ q.question }}</div>
+		<div>{{ q.answer }}</div>
+		<div>{{ q.likes }} Likes</div>
+		<div>{{ q.date_asked }}</div>
+		<div>By- {{ q.asked_by }}</div>
+		{% endfor %}
+	{% else %}
+		No questions found
+	{% endif %}
+ -->
+</div>
+<script src="{% static 'tutorial/ajax-sort.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,9 @@
+app_id: "4c14dd92-e39a-4538-8346-4e7c40cee08c"
+app_secret: "wRaJcSkG:0IPf12LT7PaKhUzY?=.rhPV"
+redirect: "http://localhost:8000/tutorial/callback"
+scopes: "openid profile offline_access user.read calendars.read"
+authority: "https://login.microsoftonline.com/"
+# authorize_endpoint: "/oauth2/v2.0/authorize"
+authorize_endpoint: '/850aa78d-94e1-4bc6-9cf3-8c11b530701c/oauth2/v2.0/authorize?{0}'
+# token_endpoint: "/oauth2/v2.0/token"
+token_endpoint: '/850aa78d-94e1-4bc6-9cf3-8c11b530701c/oauth2/v2.0/token'

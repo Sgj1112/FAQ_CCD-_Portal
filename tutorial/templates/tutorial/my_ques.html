@@ -1,0 +1,37 @@
+{% extends "tutorial/layout.html" %}
+{% load static %}
+<link href="{% static 'tutorial/load-more-button.css' %}" rel='stylesheet' type='text/css'>
+{% block content %}
+<div class="jumbotron">
+{% if all_ques.count > 0 %}
+	<div class="text-center container rounded-corners">
+	{% for q in all_ques %}
+	
+		<div class="col-12 blogBox moreBox" style="{% if  forloop.counter >= 4 %}display: none;{% endif %}">
+		      <div class="item">
+		       
+		        <!-- <img src="https://www.solodev.com/assets/fancy/travel5.jpg"> -->
+		        <div class="blogTxt">
+		          <div class="blogCategory">
+		            <h1>{{ q.question }}</h1>
+		            <h3>{{ q.answer }}</h3>
+		          </div>
+		          
+		          <div class="post_intro hidden-xs">By- {{ q.asked_by }}</div>
+		          	<div>{{ q.likes }} Likes</div>
+					<div>{{ q.date_asked }}</div>
+		        </div>
+		      </div>
+		    </div>
+	{% endfor %}
+	</div>
+	<div id="loadMore" style="">
+		<a href="#">Load More</a>
+	</div>
+{% else %}
+	No questions found
+{% endif %}
+</div>
+<script src="{% static 'tutorial/load-more-button.js' %}"></script>
+{% endblock %}
+

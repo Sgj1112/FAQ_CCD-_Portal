@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      {% if title %}
+        <title>FAQs - {{ title }}</title>
+      {% else %}
+        <title> FAQs </title>
+      {% endif %} 
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+      integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tutorial/app.css' %}">
+    <link href="{% static 'tutorial/main.css' %}" rel='stylesheet' type='text/css'>
+    <link href="{% static 'tutorial/load-more-button.css' %}" rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="{% static 'tutorial/jquery-3.4.1.js' %}"></script>
+    <script src="{% static 'tutorial/ajax.js' %}"></script>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+      integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <!-- <div class="jumbotron" style="background-image: url({% static 'tutorial/iitg.png' %}); background-size:cover; margin-top: -20px; height:auto; ">
+   <div class="container for-about">
+   
+   </div>
+</div> -->
+<div class="container-fluid">
+   
+    <img src="{% static 'tutorial/iitg.png' %}" style="margin-top: -20px;margin-bottom: 10px; background-size:stretch; width: 100%;  height:300px;">
+
+</div>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container">
+        <a href="{% url 'home' %}" class="navbar-brand"><img src="{% static 'tutorial/logo.png' %}" style="height:30px;width:30px;"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a href="{% url 'home' %}" class="nav-link{% if request.resolver_match.view_name == 'home' %} active{% endif %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'ask' %}" class="nav-link{% if request.resolver_match.view_name == 'ask' %} active{% endif %}">Ask a question</a>
+            </li>
+            {% if user.is_authenticated %}
+              <li class="nav-item" data-turbolinks="false">
+                <a class="nav-link{% if request.resolver_match.view_name == 'my_ques' %} active{% endif %}" href="{% url 'my_ques' %}">My Questions</a>
+              </li>
+            {% endif %}
+            <li class="nav-item">
+              <a href="{% url 'all' %}" class="nav-link{% if request.resolver_match.view_name == 'all' %} active{% endif %}">All Questions</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link" href="#" target="_blank">
+                <i class="fas fa-address-card"></i>About Us
+              </a>
+            </li>
+            {% if user.is_authenticated %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  {% if user.avatar %}
+                    <img src="{{ user.avatar }}" class="rounded-circle align-self-center mr-2" style="width: 32px;">
+                  {% else %}
+                    <i class="far fa-user-circle fa-lg rounded-circle align-self-center mr-2" style="width: 32px;"></i>
+                  {% endif %}
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <h5 class="dropdown-item-text mb-0">{{ user.name }}</h5>
+                  <p class="dropdown-item-text text-muted mb-0">{{ user.email }}</p>
+                  <div class="dropdown-divider"></div>
+                  <a href="{% url 'signout' %}" class="dropdown-item">Sign Out</a>
+                </div>
+              </li>
+            {% else %}
+              <li class="nav-item">
+
+                <a href="{% url 'signin' %}" class="nav-link">
+                  <i class="fas fa-sign-in-alt"></i>
+                Sign In</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <ul class="ct-socials">
+     <li>
+        <a href="/" target="_blank"><i class="fab fa-twitter"></i></a>
+     </li>
+     <li>
+        <a href="/" target="_blank"><i class="fab fa-facebook-square"></i></a>
+     </li>
+     <li>
+        <a href="/" target="_blank"><i class="fab fa-pinterest-p"></i></a>
+     </li>
+     <li>
+        <a href="/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+     </li>
+     <li>
+        <a href="/" target="_blank"><i class="fab fa-flickr"></i></a>
+     </li>
+    </ul>
+    <main role="main" class="container">
+      {% if errors %}
+        {% for error in errors %}
+          <div class="alert alert-danger" role="alert">
+            <p class="mb-3">{{ error.message }}</p>
+            {% if error.debug %}
+              <pre class="alert-pre border bg-light p-2"><code>{{ error.debug }}</code></pre>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% endif %}
+      {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+      <p class="text-center mb-0">Please contact CCD at ccd@iitg.ac.in for any Queries.</p>
+   <p class="text-center"><a href="https://www.iitg.ac.in/ccd/" target="_blank">© 2020 Centre for Career Development, IIT Guwahati</a> | Designed and Developed by <a href="https://www.facebook.com/tejus.singla.3" target="_blank">Tejus Singla </a>| <a href="https://www.facebook.com/shashank.goyal.790" target="_blank">Shashank Goyal </a>| <a href="https://www.facebook.com/profile.php?id=100003290939541" target="_blank">Kunal Singh</a> </p>
+   
+   </footer>
+
+  </body>
+</html>

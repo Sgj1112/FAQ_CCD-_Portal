@@ -1,0 +1,63 @@
+{% extends "tutorial/layout.html" %}
+{% block content %}
+{% load static %}
+<div class="jumbotron">
+  <h1>Frequently Asked Questions</h1>
+  <p class="lead">"Your time is limited, so don't waste it living someone else's life. Don't be trapped by dogma – which is living with the results of other people's thinking." -Steve Jobs</p>
+  {% if user.is_authenticated %}
+    <h4>Welcome {{ user.name }}!</h4>
+    <p>Use the navigation bar at the top of the page to get started.</p>
+  {% else %}
+    <!-- <a href="{% url 'signin' %}" class="btn btn-primary btn-large">Click here to sign in</a> -->
+  {% endif %}
+
+<!-- search -->
+</div>
+<div class="jumbotron">
+{% csrf_token %}
+<!-- <input type="text" name="search" id="search" placeholder="Question or user"> -->
+
+<!-- <div class="wrapper"> -->
+<div class="search-box">
+  <input class="search-txt" type="text" placeholder="Type to search" name="search" id="search">
+  <a class="search-btn" href="#">
+    <i class="fas fa-search"></i>
+  </a>
+</div>
+<!-- </div> -->
+
+	{% csrf_token %}
+	<label for="sort">Sort By</label>
+	<select name="sort" id="sort">
+		<option value="latest">
+			Latest
+		</option>
+		<option value="oldest">
+			Oldest
+		</option>
+		<option value="mlike">
+			Most Liked
+		</option>
+		<option value="llike">
+			Least Liked
+		</option>
+	</select>
+	<div id="sort-result">
+		
+	</div>
+<!-- 	{% if questions.count > 0 %}
+		{% for q in questions %}
+		<div>{{ q.question }}</div>
+		<div>{{ q.answer }}</div>
+		<div>{{ q.likes }} Likes</div>
+		<div>{{ q.date_asked }}</div>
+		<div>By- {{ q.asked_by }}</div>
+		{% endfor %}
+	{% else %}
+		No questions found
+	{% endif %}
+ -->
+</div>
+<script src="{% static 'tutorial/ajax-sort.js' %}"></script>
+
+{% endblock %}
